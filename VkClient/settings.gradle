@@ -1,1 +1,1 @@
-include ':app', ':vk_api', ':models'
+include ':app', ':models', ':vkapi'

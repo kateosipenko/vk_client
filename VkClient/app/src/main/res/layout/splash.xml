@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/vk_splash_button"
+        android:padding="@dimen/vk_btn_padding">
+
+        <TextView android:text="@string/app_name"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/header_text"
+            android:textColor="@color/background"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+</RelativeLayout>
