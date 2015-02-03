@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                if (url.contains(ApiConstants.AccessToken)) {
+                if (url.contains(ApiConstants.Parameters.AccessToken)) {
                     parseAccessToken(url);
                     clearCookie(webView);
                     startHome();
@@ -53,8 +53,8 @@ public class LoginActivity extends Activity {
     private void parseAccessToken(String url) {
         url = url.replace("#", "?");
         Uri uri = Uri.parse(url);
-        AppSettings.getInstance().saveAccessToken(uri.getQueryParameter(ApiConstants.AccessToken));
-        AppSettings.getInstance().saveUserId(Integer.parseInt(uri.getQueryParameter(ApiConstants.UserId)));
+        AppSettings.getInstance().saveAccessToken(uri.getQueryParameter(ApiConstants.Parameters.AccessToken));
+        AppSettings.getInstance().saveUserId(Integer.parseInt(uri.getQueryParameter(ApiConstants.Parameters.UserId)));
     }
 
     private void startHome() {

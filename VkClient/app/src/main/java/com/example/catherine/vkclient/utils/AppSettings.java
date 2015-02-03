@@ -32,19 +32,19 @@ public class AppSettings {
     }
 
     public String getAccessToken() {
-        return getString(ApiConstants.AccessToken);
+        return getString(ApiConstants.Parameters.AccessToken);
     }
 
     public void saveAccessToken(String value) {
-        saveString(ApiConstants.AccessToken, value);
+        saveString(ApiConstants.Parameters.AccessToken, value);
     }
 
     public int getUserId() {
-        return getInt(ApiConstants.UserId);
+        return getInt(ApiConstants.Parameters.UserId);
     }
 
     public void saveUserId(int userId) {
-        saveInt(ApiConstants.UserId, userId);
+        saveInt(ApiConstants.Parameters.UserId, userId);
     }
 
     private int getInt(String key) {
