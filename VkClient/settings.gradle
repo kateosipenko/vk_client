@@ -1,1 +1,1 @@
-include ':app', ':models', ':vkapi'
+include ':app', ':models', ':vkapi', ':slidingmenu'
