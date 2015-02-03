@@ -3,6 +3,7 @@ package com.vkclient.app.activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import com.models.app.NewsItem;
 import com.models.app.Newsfeed;
 import com.models.app.User;
 import com.vkapi.app.core.ApiRequest;
@@ -11,8 +12,13 @@ import com.vkapi.app.managers.VkClient;
 import com.vkclient.app.R;
 import com.vkclient.app.utils.AppSettings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeActivity extends ActionBarActivity {
 
+
+    private List<NewsItem> news = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle state) {
@@ -28,7 +34,8 @@ public class HomeActivity extends ActionBarActivity {
             @Override
             public void onResponseGot(ApiRequest<Newsfeed> request) {
                 if (request.response != null) {
-
+                    List<NewsItem> result = VkClient.instance().newsfeed().processNews(request.response.response);
+                    news.addAll(result);
                 }
             }
         });
