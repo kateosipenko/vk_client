@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.vkclient.app.R;
 
 public class SlidingActivity extends ActionBarActivity {
 
-    protected SlidingMenu slidingMenu;
+    protected SlidingMenu mSlidingMenu;
 
     @Override
     public void onCreate(Bundle state) {
@@ -17,15 +16,15 @@ public class SlidingActivity extends ActionBarActivity {
     }
 
     private void setupSlidingMenu() {
-        slidingMenu = new SlidingMenu(this);
-        slidingMenu.setMode(SlidingMenu.LEFT);
-        slidingMenu.setTouchModeBehind(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//        slidingMenu.setShadowDrawable(R.drawable.aslidingmenu_shadowgradient);
-        slidingMenu.setShadowWidth(15);
-        slidingMenu.setFadeDegree(0.0f);
-        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-        slidingMenu.setBehindWidth(200);
-//        slidingMenu.setMenu(R.layout.menu_frame);
+        mSlidingMenu = new SlidingMenu(this);
+        mSlidingMenu.setMode(SlidingMenu.LEFT);
+        mSlidingMenu.setTouchModeBehind(SlidingMenu.TOUCHMODE_FULLSCREEN);
+//        mSlidingMenu.setShadowDrawable(R.drawable.aslidingmenu_shadowgradient);
+        mSlidingMenu.setShadowWidth(15);
+        mSlidingMenu.setFadeDegree(0.0f);
+        mSlidingMenu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+        mSlidingMenu.setBehindWidth(200);
+//        mSlidingMenu.setMenu(R.layout.menu_frame);
     }
 
 }

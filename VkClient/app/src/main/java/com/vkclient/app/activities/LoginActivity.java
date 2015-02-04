@@ -10,7 +10,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.models.app.User;
 import com.vkapi.app.ApiConstants;
+import com.vkapi.app.managers.VkClient;
 import com.vkclient.app.R;
 import com.vkclient.app.utils.AppSettings;
 
@@ -47,8 +49,9 @@ public class LoginActivity extends Activity {
     private void parseAccessToken(String url) {
         url = url.replace("#", "?");
         Uri uri = Uri.parse(url);
-        AppSettings.getInstance().saveAccessToken(uri.getQueryParameter(ApiConstants.Parameters.AccessToken));
-        AppSettings.getInstance().saveUserId(Integer.parseInt(uri.getQueryParameter(ApiConstants.Parameters.UserId)));
+        String accessToken = uri.getQueryParameter(ApiConstants.Parameters.AccessToken);
+        int userId = Integer.parseInt(uri.getQueryParameter(ApiConstants.Parameters.UserId));
+        VkClient.instance().setAuthorizationData(accessToken, userId);
     }
 
     private void startHome() {

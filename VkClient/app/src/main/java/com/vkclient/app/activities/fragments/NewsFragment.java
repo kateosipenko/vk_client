@@ -17,49 +17,61 @@ import com.vkapi.app.managers.VkClient;
 import com.vkclient.app.R;
 import com.vkclient.app.adapters.NewsAdapter;
 import com.vkclient.app.utils.AppSettings;
+import com.vkclient.app.utils.VkErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewsFragment extends Fragment {
 
-    private List<NewsItem> news = new ArrayList<>();
-    private NewsAdapter adapter = new NewsAdapter();
-    private Handler handler = new Handler();
+    private final static String TAG = "news_fragment";
+
+    private View mParentView;
+
+    private List<NewsItem> mNews = new ArrayList<>();
+    private NewsAdapter mAdapter = new NewsAdapter();
+    private Handler mHandler = new Handler();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.news_fragment, container);
-        ListView list = (ListView) view.findViewById(R.id.news_list);
-        list.setAdapter(adapter);
+        mParentView = inflater.inflate(R.layout.news_fragment, container, false);
+        ListView list = (ListView) mParentView.findViewById(R.id.news_list);
+        list.setAdapter(mAdapter);
         loadMoreNews();
-        return view;
+        return mParentView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mParentView != null) {
+            ViewGroup parentViewGroup = (ViewGroup) mParentView.getParent();
+            if (parentViewGroup != null) {
+                parentViewGroup.removeAllViews();
+            }
+        }
     }
 
     private void loadMoreNews() {
-        User currentUser = new User();
-        // TODO: remove fake. Implement storing user info in db in api project
-        currentUser.setAccessToken(AppSettings.getInstance().getAccessToken());
-        currentUser.setUserId(AppSettings.getInstance().getUserId());
-        VkClient.instance().setCurrentUser(currentUser);
 
-        // TODO: implement infinite news loading
+        // TODO: implement infinite mNews loading
         VkClient.instance().newsfeed().getNewsfeed(new IApiCallback<Newsfeed>() {
             @Override
             public void onResponseGot(ApiRequest<Newsfeed> request) {
-                if (request.response != null) {
-                    List<NewsItem> result = VkClient.instance().newsfeed().processNews(request.response.response);
-                    news.addAll(result);
-                    handler.post(new Runnable() {
+                if (request.mResponse != null && request.mResponse.response != null) {
+                    List<NewsItem> result = VkClient.instance().newsfeed().processNews(request.mResponse.response);
+                    mNews.addAll(result);
+                    mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            adapter.setNews(news);
+                            mAdapter.setNews(mNews);
                         }
                     });
+                } else {
+                    VkErrorHandler.handleError(request.mResponse);
                 }
             }
         });
     }
-
 }

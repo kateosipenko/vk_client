@@ -19,15 +19,15 @@ public class NewsfeedManager extends ApiManager {
     public void getNewsfeed(IApiCallback callback) {
 
         ApiRequest<Newsfeed> request = new ApiRequest<>();
-        request.parameters = new NewsfeedParameters();
-        request.callback = callback;
-        request.responseType = new TypeToken<WebResponse<Newsfeed>>(){}.getType();
-        request.apiManagerCallback = new IApiCallback() {
+        request.mParameters = new NewsfeedParameters();
+        request.mCallback = callback;
+        request.mResponseType = new TypeToken<WebResponse<Newsfeed>>(){}.getType();
+        request.mApiManagerCallback = new IApiCallback() {
             @Override
             public void onResponseGot(ApiRequest request) {
                 // TODO: implement logic for caching data
-                if (request.callback != null) {
-                    request.callback.onResponseGot(request);
+                if (request.mCallback != null) {
+                    request.mCallback.onResponseGot(request);
                 }
             }
         };
@@ -39,7 +39,6 @@ public class NewsfeedManager extends ApiManager {
     public List<NewsItem> processNews(Newsfeed feed) {
 
         // TODO: improve algorithm
-
         List<NewsItem> result = new ArrayList<>();
         for (NewsItem item : feed.items) {
             if (item.sourceId > 0) {

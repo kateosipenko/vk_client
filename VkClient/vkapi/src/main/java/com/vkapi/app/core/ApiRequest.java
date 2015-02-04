@@ -7,13 +7,13 @@ import java.lang.reflect.Type;
 
 public class ApiRequest<T extends BaseModel> {
 
-    public RequestParameters parameters;
+    public RequestParameters mParameters;
 
-    public Type responseType;
+    public Type mResponseType;
 
-    public IApiCallback apiManagerCallback;
+    public IApiCallback mApiManagerCallback;
 
-    public IApiCallback callback;
+    public IApiCallback mCallback;
 
-    public WebResponse<T> response;
+    public WebResponse<T> mResponse;
 }

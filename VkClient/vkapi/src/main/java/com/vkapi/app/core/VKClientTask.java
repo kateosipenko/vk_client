@@ -11,9 +11,9 @@ import org.apache.http.Header;
 
 public class VKClientTask<T extends BaseModel> extends AsyncTask<ApiRequest, Void, Void> {
 
-    private static AsyncHttpClient webClient = new AsyncHttpClient();
+    private static AsyncHttpClient sWebClient = new AsyncHttpClient();
 
-    private ApiRequest apiRequest;
+    private ApiRequest mApiRequest;
 
     private AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
         @Override
@@ -28,9 +28,9 @@ public class VKClientTask<T extends BaseModel> extends AsyncTask<ApiRequest, Voi
         }
 
         private void processResponse(Header[] headers, byte[] bytes) {
-            apiRequest.response = ResponseParser.tryParseResponse(bytes, headers, apiRequest.responseType);
-            if (apiRequest.apiManagerCallback != null) {
-                apiRequest.apiManagerCallback.onResponseGot(apiRequest);
+            mApiRequest.mResponse = ResponseParser.tryParseResponse(bytes, headers, mApiRequest.mResponseType);
+            if (mApiRequest.mApiManagerCallback != null) {
+                mApiRequest.mApiManagerCallback.onResponseGot(mApiRequest);
             }
         }
     };
@@ -38,9 +38,9 @@ public class VKClientTask<T extends BaseModel> extends AsyncTask<ApiRequest, Voi
     @Override
     protected Void doInBackground(ApiRequest... params) {
         // TODO: implement sending multiple apiRequests with api method execute
-        apiRequest = params[0];
-        String url = ApiConstants.ServerUrl.concat(apiRequest.parameters.getApiMethod());
-        webClient.post(url, apiRequest.parameters.getParams(), responseHandler);
+        mApiRequest = params[0];
+        String url = ApiConstants.ServerUrl.concat(mApiRequest.mParameters.getApiMethod());
+        sWebClient.post(url, mApiRequest.mParameters.getParams(), responseHandler);
         return null;
     }
 }

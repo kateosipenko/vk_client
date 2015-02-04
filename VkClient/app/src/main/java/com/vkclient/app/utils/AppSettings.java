@@ -26,27 +26,6 @@ public class AppSettings {
         return instance;
     }
 
-    public boolean isAuthorized() {
-        String accessToken = getAccessToken();
-        return accessToken != null && !accessToken.isEmpty();
-    }
-
-    public String getAccessToken() {
-        return getString(ApiConstants.Parameters.AccessToken);
-    }
-
-    public void saveAccessToken(String value) {
-        saveString(ApiConstants.Parameters.AccessToken, value);
-    }
-
-    public int getUserId() {
-        return getInt(ApiConstants.Parameters.UserId);
-    }
-
-    public void saveUserId(int userId) {
-        saveInt(ApiConstants.Parameters.UserId, userId);
-    }
-
     private int getInt(String key) {
         return getPreferences().getInt(key, Integer.MAX_VALUE);
     }

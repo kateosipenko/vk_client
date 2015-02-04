@@ -6,9 +6,7 @@ import com.loopj.android.http.RequestParams;
 
 public class UserManager extends ApiManager {
 
-    public User getCurrentUser() {
-        VKClientTask rest = new VKClientTask();
-        RequestParams params = new RequestParams();
-        return new User();
+    public void loadCurrentUser(String accessToken) {
+
     }
 }

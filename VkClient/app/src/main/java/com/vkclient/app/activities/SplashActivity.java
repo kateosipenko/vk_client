@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.vkapi.app.managers.VkClient;
 import com.vkclient.app.R;
 import com.vkclient.app.utils.AppSettings;
 
@@ -20,13 +21,13 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
-                if (AppSettings.getInstance().isAuthorized()) {
+                if (VkClient.instance().getCurrentUser() != null) {
                     startHome();
                 } else {
                     startLogin();
                 }
             }
-        }, 2000);
+        }, 1000);
     }
 
     private void startHome() {

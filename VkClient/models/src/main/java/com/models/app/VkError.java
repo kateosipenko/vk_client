@@ -2,7 +2,7 @@ package com.models.app;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Error {
+public class VkError {
 
     @SerializedName("error_code")
     public int code;

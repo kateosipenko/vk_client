@@ -1,7 +1,9 @@
 package com.vkapi.app.core;
 
 import com.google.gson.Gson;
-import com.models.app.BaseModel;
+import com.models.app.*;
+import com.models.app.VkError;
+import com.vkapi.app.*;
 
 import org.apache.http.Header;
 
@@ -20,27 +22,13 @@ public class ResponseParser {
             if (responseContent != null && !responseContent.isEmpty()) {
                 Gson gson = new Gson();
                 result =  gson.fromJson(responseContent, type);
+            } else {
+                result = new WebResponse<>();
+                result.error = createParsingError();
             }
         }
 
         return result;
-    }
-
-    private static String getResponseContent(byte[] bytes, Header[] headers) {
-        String responseContent = "";
-        if (isGziped(headers)) {
-
-            try {
-                responseContent = decompress(bytes);
-            } catch (IOException ex) {
-                responseContent = new String(bytes);
-                // TODO: implement logging
-            }
-        } else  {
-            responseContent = new String(bytes);
-        }
-
-        return responseContent;
     }
 
     public static boolean isGziped(Header[] headers) {
@@ -64,6 +52,30 @@ public class ResponseParser {
         gzipInputStream.close();
         inputStr.close();
         return result;
+    }
+
+
+    private static String getResponseContent(byte[] bytes, Header[] headers) {
+        String responseContent = "";
+        if (isGziped(headers)) {
+
+            try {
+                responseContent = decompress(bytes);
+            } catch (IOException ex) {
+                responseContent = new String(bytes);
+                // TODO: implement logging
+            }
+        } else  {
+            responseContent = new String(bytes);
+        }
+
+        return responseContent;
+    }
+
+    private static VkError createParsingError() {
+        VkError error = new VkError();
+        error.code = ApiConstants.ErrorsCodes.PARSING_ERROR_CODE;
+        return error;
     }
 
 }

@@ -2,6 +2,7 @@ package com.vkapi.app.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.models.app.BaseModel;
+import com.models.app.VkError;
 
 public class WebResponse<T extends BaseModel> {
 
@@ -9,5 +10,5 @@ public class WebResponse<T extends BaseModel> {
     public T response;
 
     @SerializedName("error")
-    public Error error;
+    public VkError error;
 }

@@ -24,4 +24,12 @@ public class ApiConstants {
     public class Methods {
         public static final String NewsfeedGet = "newsfeed.get";
     }
+
+    public class ErrorsCodes {
+        public final static int PARSING_ERROR_CODE = -1;
+    }
+
+    public class CacheKeys {
+        public final static String CurrentUser = "cur_user";
+    }
 }
