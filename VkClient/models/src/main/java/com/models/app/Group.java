@@ -13,4 +13,7 @@ public class Group {
     @SerializedName("screen_name")
     public String screenName;
 
+    @SerializedName("photo_100")
+    public String photo100;
+
 }

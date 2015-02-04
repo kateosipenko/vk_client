@@ -26,6 +26,27 @@ public class NewsItem {
 
     public Profile profile;
 
+    public String getName() {
+        String result = "";
+        if (group != null) {
+            result = group.screenName;
+        } else if (profile != null) {
+            result = profile.getUserName();
+        }
+
+        return result;
+    }
+
+    public String getPhotoMedium() {
+        String result = "";
+        if (group != null) {
+            result = group.photo100;
+        } else if (profile != null) {
+            result = profile.photoMediumRec;
+        }
+
+        return result;
+    }
 
     public enum PostType {
         @SerializedName("post")
@@ -46,7 +67,7 @@ public class NewsItem {
         @SerializedName("friend")
         FRIEND,
         @SerializedName("note")
-        NOTE
+        NOTE;
     }
 
 }
